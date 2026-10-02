@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">राष्ट्रनीति</string>
+    <string name="app_tagline">एक आम आदमी से प्रधानमंत्री तक</string>
+    <string name="country_name">भारत</string>
+    <string name="start_journey">यात्रा शुरू करें</string>
+    <string name="opening_quote">यह देश आपका है।\nअब फैसला आपका है।</string>
+    <string name="opening_question">क्या एक आम नागरिक देश का प्रधानमंत्री बन सकता है?</string>
+    
+    <!-- Navigation -->
+    <string name="nav_home">गृह (Home)</string>
+    <string name="nav_map">मानचित्र (Map)</string>
+    <string name="nav_party">दल (Party)</string>
+    <string name="nav_campaign">अभियान (Campaign)</string>
+    <string name="nav_govt">सरकार (Govt)</string>
+    <string name="nav_media">मीडिया (Media)</string>
+    <string name="nav_quiz">प्रश्नोत्तरी (Quiz)</string>
+    <string name="nav_parliament">संसद (Parliament)</string>
+    <string name="nav_multiplayer">मल्टीप्लेयर</string>
+    
+    <!-- Stats -->
+    <string name="stat_public_trust">जनविश्वास</string>
+    <string name="stat_funds">पार्टी कोष</string>
+    <string name="stat_workers">कार्यकर्ता</string>
+    <string name="stat_popularity">लोकप्रियता</string>
+    <string name="stat_influence">राजनीतिक प्रभाव</string>
+</resources>

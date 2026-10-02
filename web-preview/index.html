@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>राष्ट्रनीति (RashtraNiti) - एक आम आदमी से प्रधानमंत्री तक</title>
+  <meta name="description" content="भारत का पहला राजनीतिक रणनीति और शासन सिमुलेशन मोबाइल गेम">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="mobile-frame">
+    <!-- Top System Bar -->
+    <header id="top-bar" class="hidden">
+      <div class="top-row">
+        <div class="level-badge-container">
+          <div class="level-circle" id="top-level-num">1</div>
+          <div class="level-details">
+            <span class="level-title" id="top-level-title">आम नागरिक</span>
+            <span class="day-tracker" id="top-day-tracker">दिन 1 • चुनाव में 30 दिन शेष</span>
+          </div>
+        </div>
+        <div class="top-actions">
+          <button id="btn-advance-day" class="btn-sm btn-advance" title="अगले दिन पर जाएं">
+            <span>⏩</span> <span class="lang-txt" data-hi="अगला दिन" data-en="Next Day">अगला दिन</span>
+          </button>
+          <button id="btn-lang-toggle" class="btn-sm btn-lang">EN</button>
+        </div>
+      </div>
+      <div class="resource-strip">
+        <div class="res-item" title="पार्टी कोष">
+          <span class="res-icon">💰</span>
+          <span id="res-funds">₹5.00 L</span>
+        </div>
+        <div class="res-item" title="जनविश्वास">
+          <span class="res-icon">🤝</span>
+          <span id="res-trust">55%</span>
+        </div>
+        <div class="res-item" title="ऊर्जा">
+          <span class="res-icon">⚡</span>
+          <span id="res-energy">100%</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Notification Banner -->
+    <div id="info-banner" class="info-banner hidden">
+      <span class="banner-icon">ℹ️</span>
+      <span id="banner-text" class="banner-text">सूचना संदेश</span>
+      <button id="btn-banner-close" class="banner-close">✕</button>
+    </div>
+
+    <!-- Main Screens Container -->
+    <main class="screen-viewport">
+      <!-- 1. OPENING SCREEN -->
+      <section id="screen-opening" class="game-screen active">
+        <div class="opening-content">
+          <div class="tricolor-bar">
+            <span class="saffron"></span>
+            <span class="white"></span>
+            <span class="green"></span>
+          </div>
+
+          <div class="cinematic-map-symbol">
+            <svg viewBox="0 0 160 180" class="bharat-svg">
+              <polygon points="72,12 108,45 142,56 118,80 102,125 78,168 54,125 24,88 38,45" class="bharat-poly" />
+              <circle cx="68" cy="58" r="6" class="delhi-node" />
+              <circle cx="68" cy="58" r="14" class="delhi-pulse" />
+            </svg>
+          </div>
+
+          <div class="brand-tag">BHARAT</div>
+          <h1 class="game-title">राष्ट्रनीति</h1>
+          <p class="game-tagline">“एक आम आदमी से प्रधानमंत्री तक”</p>
+
+          <div class="opening-card">
+            <p class="quote-hi">यह देश आपका है।<br><strong>अब फैसला आपका है।</strong></p>
+            <p class="question-hi">क्या एक आम नागरिक देश का प्रधानमंत्री बन सकता है?</p>
+          </div>
+
+          <button id="btn-start-journey" class="btn-primary btn-journey">
+            <span>यात्रा शुरू करें</span>
+            <span class="btn-arrow">➔</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- 2. PLAYER CREATION SCREEN -->
+      <section id="screen-player-creation" class="game-screen hidden">
+        <div class="screen-header">
+          <div class="step-num">चरण 1/2</div>
+          <h2>आम नागरिक प्रोफ़ाइल</h2>
+          <p class="subtitle">अपनी पहचान और पृष्ठभूमि निर्धारित करें</p>
+        </div>
+        <form id="form-player-creation" class="scroll-form" onsubmit="event.preventDefault();">
+          <div class="form-group">
+            <label>पूरा नाम (Full Name)</label>
+            <input type="text" id="player-name" value="अर्जुन शर्मा" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label>आयु (Age)</label>
+              <input type="number" id="player-age" value="32" min="25" max="80">
+            </div>
+            <div class="form-group flex-1">
+              <label>लिंग (Gender)</label>
+              <select id="player-gender">
+                <option value="पुरुष">पुरुष (Male)</option>
+                <option value="महिला">महिला (Female)</option>
+                <option value="अन्य">अन्य</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>गृह राज्य (State)</label>
+            <select id="player-state">
+              <option value="उत्तर प्रदेश">उत्तर प्रदेश (Uttar Pradesh)</option>
+              <option value="बिहार">बिहार (Bihar)</option>
+              <option value="मध्य प्रदेश">मध्य प्रदेश (Madhya Pradesh)</option>
+              <option value="राजस्थान">राजस्थान (Rajasthan)</option>
+              <option value="महाराष्ट्र">महाराष्ट्र (Maharashtra)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>प्रारंभिक निर्वाचन क्षेत्र (Constituency)</label>
+            <input type="text" id="player-constituency" value="वाराणसी उत्तर (Varanasi North)">
+          </div>
+          <div class="form-group">
+            <label>व्यवसाय (Occupation)</label>
+            <select id="player-occupation">
+              <option value="सामाजिक कार्यकर्ता">सामाजिक कार्यकर्ता (Social Worker)</option>
+              <option value="अधिवक्ता / वकील">अधिवक्ता / वकील (Lawyer)</option>
+              <option value="शिक्षक">शिक्षक (Teacher)</option>
+              <option value="किसान">किसान (Farmer)</option>
+              <option value="युवा उद्यमी">युवा उद्यमी (Entrepreneur)</option>
+            </select>
+          </div>
+          <div class="stats-preview-card">
+            <h4>प्रारंभिक आंकड़े (Starting Attributes)</h4>
+            <div class="stat-grid">
+              <div>जनविश्वास: <strong class="text-green">55%</strong></div>
+              <div>संवाद कौशल: <strong>50</strong></div>
+              <div>राजनीतिक समझ: <strong>40</strong></div>
+              <div>निजी पूंजी: <strong class="text-gold">₹1,50,000</strong></div>
+            </div>
+          </div>
+          <button type="button" id="btn-to-party-creation" class="btn-primary mt-16">
+            दल का गठन करें ➔
+          </button>
+        </form>
+      </section>
+
+      <!-- 3. PARTY CREATION SCREEN -->
+      <section id="screen-party-creation" class="game-screen hidden">
+        <div class="screen-header">
+          <div class="step-num">चरण 2/2</div>
+          <h2>राजनीतिक दल का गठन</h2>
+          <p class="subtitle">पार्टी का नाम, चुनाव चिह्न व प्राथमिकताओं का चयन</p>
+        </div>
+        <form id="form-party-creation" class="scroll-form" onsubmit="event.preventDefault();">
+          <div class="form-group">
+            <label>पार्टी का नाम (Party Name)</label>
+            <input type="text" id="party-name" value="जन उत्थान पार्टी" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label>संक्षिप्त नाम (Acronym)</label>
+              <input type="text" id="party-shortname" value="JUP" maxlength="5">
+            </div>
+            <div class="form-group flex-2">
+              <label>पार्टी नारा (Slogan)</label>
+              <input type="text" id="party-slogan" value="जन सेवा ही राष्ट्र सेवा">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>चुनाव चिह्न (Symbol)</label>
+            <div class="symbol-selector" id="symbol-options">
+              <button type="button" class="btn-symbol active" data-symbol="दीपक (Lamp)">🪔 दीपक</button>
+              <button type="button" class="btn-symbol" data-symbol="मशाल (Torch)">🔥 मशाल</button>
+              <button type="button" class="btn-symbol" data-symbol="हलधर (Plow)">🌾 हल</button>
+              <button type="button" class="btn-symbol" data-symbol="किताब (Book)">📖 किताब</button>
+              <button type="button" class="btn-symbol" data-symbol="तराजू (Scale)">⚖️ तराजू</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>पार्टी का मुख्य रंग (Flag Color)</label>
+            <div class="color-swatches" id="color-options">
+              <span class="swatch active" data-color="#FF671F" style="background:#FF671F;"></span>
+              <span class="swatch" data-color="#2563EB" style="background:#2563EB;"></span>
+              <span class="swatch" data-color="#059669" style="background:#059669;"></span>
+              <span class="swatch" data-color="#7C3AED" style="background:#7C3AED;"></span>
+              <span class="swatch" data-color="#DC2626" style="background:#DC2626;"></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>घोषणापत्र की मुख्य प्राथमिकताएं (चुनें 3)</label>
+            <div class="priority-chips" id="priority-options">
+              <span class="chip active" data-prio="शिक्षा">📚 शिक्षा</span>
+              <span class="chip active" data-prio="रोजगार">💼 रोजगार</span>
+              <span class="chip active" data-prio="स्वास्थ्य">🏥 स्वास्थ्य</span>
+              <span class="chip" data-prio="कृषि">🌾 कृषि कल्याण</span>
+              <span class="chip" data-prio="बुनियादी ढांचा">🛣️ बुनियादी ढांचा</span>
+              <span class="chip" data-prio="तकनीक">💻 तकनीक</span>
+            </div>
+          </div>
+          <button type="button" id="btn-finish-party" class="btn-primary mt-16">
+            पार्टी स्थापित करें एवं मुख्य स्क्रीन पर जाएं
+          </button>
+        </form>
+      </section>
+
+      <!-- 4. HOME / DASHBOARD SCREEN -->
+      <section id="screen-home" class="game-screen hidden">
+        <div class="news-ticker">
+          <span class="ticker-badge">ताज़ा</span>
+          <div class="ticker-marquee" id="ticker-text">
+            चुनाव आयोग ने आचार संहिता और चुनावी पर्यवेक्षकों की सूची जारी की। राजनैतिक दलों में हलचल!
+          </div>
+        </div>
+
+        <div class="card executive-card">
+          <div class="exec-header">
+            <div>
+              <h3 id="home-player-name">अर्जुन शर्मा</h3>
+              <p class="party-line" id="home-party-line">जन उत्थान पार्टी (JUP) • 🪔 दीपक</p>
+            </div>
+            <div class="badge-level-tag" id="home-level-tag">स्तर 2: दल संस्थापक</div>
+          </div>
+          <div class="objective-box">
+            <span class="obj-label">वर्तमान राजनीतिक लक्ष्य (Objective):</span>
+            <p class="obj-text" id="home-objective-text">घर-घर संपर्क और जनसभाएं आयोजित कर चुनावी तैयारी 40%+ करें।</p>
+          </div>
+        </div>
+
+        <!-- 6 Metrics Mini Cards -->
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <span class="m-label">पार्टी कोष</span>
+            <span class="m-val text-gold" id="m-funds">₹5.00 L</span>
+          </div>
+          <div class="metric-card">
+            <span class="m-label">जनविश्वास</span>
+            <span class="m-val text-green" id="m-trust">55%</span>
+          </div>
+          <div class="metric-card">
+            <span class="m-label">लोकप्रियता</span>
+            <span class="m-val text-saffron" id="m-pop">42%</span>
+          </div>
+          <div class="metric-card">
+            <span class="m-label">कार्यकर्ता/दल</span>
+            <span class="m-val" id="m-volunteers">450</span>
+          </div>
+          <div class="metric-card">
+            <span class="m-label">चुनावी तैयारी</span>
+            <span class="m-val text-saffron" id="m-readiness">35%</span>
+          </div>
+          <div class="metric-card">
+            <span class="m-label">लोकसभा सीटें</span>
+            <span class="m-val text-gold" id="m-seats">0 / 543</span>
+          </div>
+        </div>
+
+        <!-- Quick Action Buttons -->
+        <div class="action-grid">
+          <button class="btn-action bg-saffron" id="btn-quick-campaign">
+            <span>📢</span>
+            <strong>अभियान चलाएं</strong>
+          </button>
+          <button class="btn-action bg-navy" id="btn-quick-map">
+            <span>🗺️</span>
+            <strong>मानचित्र देखें</strong>
+          </button>
+          <button class="btn-action bg-green" id="btn-quick-election">
+            <span>🗳️</span>
+            <strong>मतदान / चुनाव</strong>
+          </button>
+          <button class="btn-action bg-slate" id="btn-quick-parliament">
+            <span>🏛️</span>
+            <strong>संसद व सरकार</strong>
+          </button>
+        </div>
+
+        <!-- Demographic Support Bars -->
+        <div class="card mt-12">
+          <h4>सामाजिक वर्गों में समर्थन (Demographic Support)</h4>
+          <div class="demo-item">
+            <div class="demo-label"><span>युवा वर्ग (Youth)</span> <span id="demo-youth-val">52%</span></div>
+            <div class="progress-bar"><div class="fill bg-saffron" id="demo-youth-bar" style="width:52%;"></div></div>
+          </div>
+          <div class="demo-item">
+            <div class="demo-label"><span>ग्रामीण मतदाता (Rural)</span> <span id="demo-rural-val">48%</span></div>
+            <div class="progress-bar"><div class="fill bg-green" id="demo-rural-bar" style="width:48%;"></div></div>
+          </div>
+          <div class="demo-item">
+            <div class="demo-label"><span>शहरी नागरिक (Urban)</span> <span id="demo-urban-val">45%</span></div>
+            <div class="progress-bar"><div class="fill bg-blue" id="demo-urban-bar" style="width:45%;"></div></div>
+          </div>
+          <div class="demo-item">
+            <div class="demo-label"><span>किसान व कृषि (Farmers)</span> <span id="demo-farmers-val">54%</span></div>
+            <div class="progress-bar"><div class="fill bg-green" id="demo-farmers-bar" style="width:54%;"></div></div>
+          </div>
+          <div class="demo-item">
+            <div class="demo-label"><span>श्रमिक वर्ग (Workers)</span> <span id="demo-workers-val">50%</span></div>
+            <div class="progress-bar"><div class="fill bg-gold" id="demo-workers-bar" style="width:50%;"></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. MAP SCREEN -->
+      <section id="screen-map" class="game-screen hidden">
+        <div class="screen-header">
+          <h2>राजनीतिक मानचित्र (Map)</h2>
+          <p class="subtitle">राजनीतिक प्रभाव एवं निर्वाचन क्षेत्रों का विस्तार</p>
+        </div>
+
+        <div class="map-level-tabs">
+          <button class="btn-tab active" data-zoom="india">संपूर्ण भारत</button>
+          <button class="btn-tab" data-zoom="state">राज्य स्तर</button>
+          <button class="btn-tab" data-zoom="constituency">निर्वाचन क्षेत्र</button>
+        </div>
+
+        <div class="interactive-map-box">
+          <svg viewBox="0 0 320 300" class="india-interactive-svg">
+            <polygon points="144,20 188,60 270,72 230,128 200,210 160,285 120,210 70,150 90,75" class="svg-india-body" />
+            <!-- City nodes -->
+            <g class="map-node active" id="node-varanasi" transform="translate(178, 115)">
+              <circle r="7" class="node-circle player-node"></circle>
+              <circle r="14" class="node-ripple"></circle>
+              <text y="18" class="node-text">वाराणसी</text>
+            </g>
+            <g class="map-node active" id="node-gorakhpur" transform="translate(190, 100)">
+              <circle r="6" class="node-circle opp-node"></circle>
+              <text y="18" class="node-text">गोरखपुर</text>
+            </g>
+            <g class="map-node" id="node-patna" transform="translate(215, 120)">
+              <circle r="6" class="node-circle neutral-node"></circle>
+              <text y="18" class="node-text">पटना</text>
+            </g>
+            <g class="map-node" id="node-indore" transform="translate(130, 155)">
+              <circle r="6" class="node-circle neutral-node"></circle>
+              <text y="18" class="node-text">इंदौर</text>
+            </g>
+            <g class="map-node" id="node-jaipur" transform="translate(110, 100)">
+              <circle r="6" class="node-circle neutral-node"></circle>
+              <text y="18" class="node-text">जयपुर</text>
+            </g>
+          </svg>
+          <div class="map-legend">
+            <span>🟢 आपकी पार्टी</span>
+            <span>🔵 विपक्षी मोर्चा</span>
+            <span>⚪ स्वतंत्र / अन्य</span>
+          </div>
+        </div>
+
+        <div class="constituency-list" id="constituency-items-container">
+          <!-- Dynamically populated -->
+        </div>
+      </section>
+
+      <!-- 6. CAMPAIGN SCREEN -->
+      <section id="screen-campaign" class="game-screen hidden">
+        <div class="screen-header">
+          <h2>अभियान केंद्र (Campaign)</h2>
+          <p class="subtitle">रणनीति, जनसंपर्क एवं मीडिया प्रबंधन से जनविश्वास अर्जित करें</p>
+        </div>
+
+        <div class="card campaign-stats-strip">
+          <div class="camp-stat"><span>कोष:</span> <strong class="text-gold" id="camp-funds">₹5.00 L</strong></div>
+          <div class="camp-stat"><span>ऊर्जा:</span> <strong class="text-saffron" id="camp-energy">100%</strong></div>
+          <div class="camp-stat"><span>तैयारी:</span> <strong class="text-green" id="camp-readiness">35%</strong></div>
+        </div>
+
+        <div class="campaign-actions-list" id="campaign-actions-container">
+          <!-- 10 Campaign action cards inserted here -->
+        </div>
+      </section>
+
+      <!-- 7. ELECTION SCREEN -->
+      <section id="screen-election" class="game-screen hidden">
+        <div class="screen-header">
+          <h2>भारत निर्वाचन आयोग (Election)</h2>
+          <p class="subtitle">पारदर्शी, निष्पक्ष एवं संवैधानिक मतदान प्रक्रिया</p>
+        </div>
+
+        <div class="card eci-rules-card">
+          <div class="card-icon-title">🛡️ आदर्श चुनाव आचार संहिता (MCC)</div>
+          <p class="rules-desc">
+            • व्यय सीमा: ₹95 लाख प्रति लोकसभा क्षेत्र<br>
+            • धर्म/जाति पर आधारित प्रचार पर पूर्ण प्रतिबंध<br>
+            • इलेक्ट्रॉनिक वोटिंग मशीन (EVM) व VVPAT से शत-प्रतिशत सत्यापन
+          </p>
+        </div>
+
+        <div class="card poll-trigger-card">
+          <h3 id="election-status-heading">मतदान एवं मतगणना</h3>
+          <p class="text-muted" id="election-status-desc">जनविश्वास, पार्टी लोकप्रियता और अभियान के आधार पर परिणाम निकलेंगे।</p>
+          <button id="btn-count-votes" class="btn-primary mt-12 btn-vote-count">
+            🗳️ EVM मतगणना प्रारंभ करें
+          </button>
+        </div>
+
+        <div id="counting-spinner" class="card counting-card hidden">
+          <div class="spinner"></div>
+          <h4>EVM कंट्रोल यूनिट से मतों की गणना जारी है...</h4>
+          <p class="text-muted">राउंड 1 से 18 के रुझान संकलित हो रहे हैं</p>
+        </div>
+
+        <div id="election-result-card" class="card result-card hidden">
+          <!-- Dynamically populated with Vote share bar charts, Turnout, Winner -->
+        </div>
+      </section>
+
+      <!-- 8. CABINET & PM DASHBOARD SCREEN -->
+      <section id="screen-cabinet" class="game-screen hidden">
+        <div class="screen-header">
+          <h2>मंत्रिमंडल एवं PM डैशबोर्ड</h2>
+          <p class="subtitle">केंद्रीय मंत्रालयों का आवंटन एवं राष्ट्रीय प्रदर्शन</p>
+        </div>
+
+        <div class="cabinet-toggle-tabs">
+          <button class="btn-tab active" id="tab-ministers">मंत्रिमंडल (Ministers)</button>
+          <button class="btn-tab" id="tab-pm-stats">PM डैशबोर्ड (National Stats)</button>
+          <button class="btn-tab bg-green" id="btn-open-budget-view">वार्षिक बजट ➔</button>
+        </div>
+
+        <div id="view-ministers" class="tab-view active">
+          <div class="ministers-list" id="ministers-container">
+            <!-- 8 Ministers inserted -->
+          </div>
+        </div>
+
+        <div id="view-pm-stats" class="tab-view hidden">
+          <div class="metrics-grid">
+            <div class="metric-card"><span class="m-label">GDP विकास दर</span><span class="m-val text-green">6.8%</span></div>
+            <div class="metric-card"><span class="m-label">मुद्रास्फीति (Inflation)</span><span class="m-val text-saffron">4.5%</span></div>
+            <div class="metric-card"><span class="m-label">बेरोजगारी दर</span><span class="m-val text-red">5.8%</span></div>
+            <div class="metric-card"><span class="m-label">सरकार अनुमोदन</span><span class="m-val text-gold">58%</span></div>
+            <div class="metric-card"><span class="m-label">जन संतुष्टि</span><span class="m-val text-green">62%</span></div>
+            <div class="metric-card"><span class="m-label">राष्ट्रीय ऋण</span><span class="m-val">55.4% GDP</span></div>
+          </div>
+          <div class="card mt-12">
+            <h4>क्षेत्रीय विकास सूचकांक (Sectoral Indexes)</h4>
+            <div class="demo-item"><div class="demo-label"><span>बुनियादी ढांचा (Infra)</span> <span>71/100</span></div><div class="progress-bar"><div class="fill bg-saffron" style="width:71%;"></div></div></div>
+            <div class="demo-item"><div class="demo-label"><span>शिक्षा (Education)</span> <span>68/100</span></div><div class="progress-bar"><div class="fill bg-blue" style="width:68%;"></div></div></div>
+            <div class="demo-item"><div class="demo-label"><span>स्वास्थ्य (Healthcare)</span> <span>64/100</span></div><div class="progress-bar"><div class="fill bg-green" style="width:64%;"></div></div></div>
+            <div class="demo-item"><div class="demo-label"><span>तकनीक (Technology)</span> <span>76/100</span></div><div class="progress-bar"><div class="fill bg-gold" style="width:76%;"></div></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 9. BUDGET SCREEN -->
+      <section id="screen-budget" class="game-screen hidden">
+        <div class="screen-header">
+          <h2>केंद्रीय वार्षिक बजट (Budget)</h2>
+          <p class="subtitle">राजकोषीय घाटा एवं मंत्रालयवार आवंटन संशोधन</p>
+        </div>
+
+        <div class="card budget-summary-card">
+          <div class="b-row"><span>कुल अनुमानित राजस्व:</span> <strong class="text-green">₹32,00,000 करोड़</strong></div>
+          <div class="b-row"><span>कुल प्रस्तावित व्यय:</span> <strong class="text-red" id="b-total-exp">₹36,50,000 करोड़</strong></div>
+          <div class="b-row"><span>राजकोषीय घाटा (Deficit):</span> <strong class="text-gold" id="b-deficit">₹4,50,000 करोड़</strong></div>
+        </div>
+
+        <div class="budget-items-list" id="budget-items-container">
+          <!-- Dynamically populated allocations with +/- buttons -->
+        </div>
+
+        <button id="btn-back-to-cabinet" class="btn-primary mt-16">मंत्रिमंडल पर लौटें ➔</button>
+      </section>
+
+      <!-- 10. PARLIAMENT SCREEN -->
+      <section id="screen-parliament" class="game-screen hidden">
+        <div class="screen-header">
+          <h2>लोकसभा सदन (Parliament)</h2>
+          <p class="subtitle">विधेयक प्रस्तुति, नीतिगत बहस एवं मतदान पटल</p>
+        </div>
+
+        <div class="card parliament-benches-card">
+          <div class="card-icon-title">🏛️ सदन की स्थिति (543 सीटें • बहुमत: 272)</div>
+          <div class="benches-bar-container mt-8">
+            <div class="bench-label"><span>सत्ता पक्ष: 280 सीटें</span> <span>विपक्ष: 263 सीटें</span></div>
+            <div class="progress-bar"><div class="fill bg-green" style="width:52%;"></div></div>
+          </div>
+        </div>
+
+        <div class="bills-list" id="parliament-bills-container">
+          <!-- Bills dynamically populated -->
+        </div>
+      </section>
+
+      <!-- 11. QUIZ SCREEN -->
+      <section id="screen-quiz" class="game-screen hidden">
+        <div class="screen-header">
+          <h2>संवैधानिक प्रश्नोत्तरी (Quiz)</h2>
+          <p class="subtitle">संविधान, लोकतंत्र व शासन ज्ञान से नेतृत्व क्षमता बढ़ाएं</p>
+        </div>
+
+        <div class="card quiz-score-strip">
+          <div>कुल ज्ञान अंक (Score): <strong class="text-gold" id="quiz-score-val">0 अंक</strong></div>
+          <div class="quiz-step-tag" id="quiz-step-tag">प्रश्न 1 / 5</div>
+        </div>
+
+        <div class="card quiz-card" id="quiz-question-box">
+          <div class="quiz-category" id="quiz-category">भारतीय संविधान</div>
+          <h3 class="quiz-question" id="quiz-question-text">भारत का संविधान किस तिथि को पूर्ण रूप से लागू हुआ था?</h3>
+          <div class="quiz-options" id="quiz-options-container">
+            <!-- Options A, B, C, D -->
+          </div>
+          <div id="quiz-explanation" class="quiz-exp hidden"></div>
+          <button id="btn-submit-quiz" class="btn-primary mt-12">उत्तर जमा करें (+10 अंक)</button>
+        </div>
+      </section>
+
+      <!-- 12. MEDIA ROOM SCREEN -->
+      <section id="screen-media" class="game-screen hidden">
+        <div class="screen-header">
+          <h2>मीडिया कक्ष (Media Room)</h2>
+          <p class="subtitle">प्रेस वार्ता, टीवी डिबेट्स एवं जनसंचार प्रबंधन</p>
+        </div>
+        <div class="card">
+          <h4>राष्ट्रीय मीडिया का ध्यान (Media Attention)</h4>
+          <div class="progress-bar mt-8"><div class="fill bg-saffron" id="media-attention-bar" style="width:30%;"></div></div>
+        </div>
+        <div class="media-channels mt-12">
+          <div class="card media-channel-card">
+            <span class="ch-icon">📺</span>
+            <div><strong>राष्ट्रीय टीवी समाचार</strong><p class="text-muted">पहुंच: 4.5 करोड़ दर्शक • तीखी बहस</p></div>
+          </div>
+          <div class="card media-channel-card">
+            <span class="ch-icon">📰</span>
+            <div><strong>दैनिक समाचार पत्र</strong><p class="text-muted">पहुंच: 2.8 करोड़ पाठक • नीतिगत विश्लेषण</p></div>
+          </div>
+          <div class="card media-channel-card">
+            <span class="ch-icon">📱</span>
+            <div><strong>डिजिटल व सोशल मीडिया</strong><p class="text-muted">पहुंच: 7.2 करोड़ युवा • त्वरित रुझान</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 13. MULTIPLAYER SCREEN -->
+      <section id="screen-multiplayer" class="game-screen hidden">
+        <div class="screen-header">
+          <h2>मल्टीप्लेयर रणभूमि (Multiplayer)</h2>
+          <p class="subtitle">काल्पनिक दलों की ऑनलाइन चुनावी प्रतिस्पर्धा व गठबंधन</p>
+        </div>
+        <div class="card fairplay-card">
+          <div class="card-icon-title">🛡️ संवैधानिक निष्पक्षता (Fair Play)</div>
+          <p class="rules-desc">यह पूर्णतः काल्पनिक राजनीतिक सिमुलेशन है। वास्तविक धन या वास्तविक राजनीति का हस्तक्षेप वर्जित है।</p>
+        </div>
+        <div class="mp-modes-list mt-12">
+          <div class="card mp-mode-card">
+            <div class="mp-mode-header"><strong>1. बहुदलीय आम चुनाव</strong> <span class="badge-online">लॉबी</span></div>
+            <p class="text-muted">4 से 8 काल्पनिक खिलाड़ी दलों के बीच लोकसभा चुनाव का सीधा मुकाबला।</p>
+          </div>
+          <div class="card mp-mode-card">
+            <div class="mp-mode-header"><strong>2. दल बनाम दल द्वंद्व</strong> <span class="badge-online">लॉबी</span></div>
+            <p class="text-muted">दो प्रतिद्वंद्वी दलों के बीच चुनावी रैलियों और नीतियों की सीधी टक्कर।</p>
+          </div>
+          <div class="card mp-mode-card">
+            <div class="mp-mode-header"><strong>3. निर्वाचन क्षेत्र संग्राम</strong> <span class="badge-online">लॉबी</span></div>
+            <p class="text-muted">एक प्रमुख सीट पर वोट शेयर की रणनीतिक जंग।</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 14. PROFILE & ACHIEVEMENTS SCREEN -->
+      <section id="screen-profile" class="game-screen hidden">
+        <div class="screen-header">
+          <h2>प्रोफ़ाइल व उपलब्धियां</h2>
+          <p class="subtitle">खिलाड़ी आंकड़े एवं गेम सेव सिस्टम</p>
+        </div>
+        <div class="card">
+          <h3 id="prof-name">अर्जुन शर्मा</h3>
+          <p class="text-saffron" id="prof-occ">सामाजिक कार्यकर्ता • स्नातकोत्तर</p>
+          <div class="profile-stats-grid mt-8">
+            <div>नेतृत्व: <strong id="prof-lead">45</strong></div>
+            <div>संवाद: <strong id="prof-comm">50</strong></div>
+            <div>प्रशासन: <strong id="prof-admin">40</strong></div>
+            <div>संकट प्रबंधन: <strong id="prof-crisis">40</strong></div>
+          </div>
+        </div>
+        <div class="profile-btn-row mt-12">
+          <button id="btn-save-game" class="btn-primary bg-green flex-1">💾 खेल सहेजें (Save)</button>
+          <button id="btn-lang-toggle-profile" class="btn-primary bg-navy flex-1">🌐 Switch to English</button>
+        </div>
+        <div class="achievements-section mt-16">
+          <h4>राजनीतिक कीर्तिमान (Achievements)</h4>
+          <div class="achievements-list" id="achievements-container">
+            <!-- Unlocked & locked achievements -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Bottom Navigation Bar -->
+    <nav id="bottom-nav" class="bottom-nav hidden">
+      <button class="nav-item active" data-screen="home">
+        <span class="nav-icon">🏛️</span>
+        <span class="nav-label">गृह</span>
+      </button>
+      <button class="nav-item" data-screen="map">
+        <span class="nav-icon">🗺️</span>
+        <span class="nav-label">मानचित्र</span>
+      </button>
+      <button class="nav-item" data-screen="campaign">
+        <span class="nav-icon">📢</span>
+        <span class="nav-label">अभियान</span>
+      </button>
+      <button class="nav-item" data-screen="election">
+        <span class="nav-icon">🗳️</span>
+        <span class="nav-label">चुनाव</span>
+      </button>
+      <button class="nav-item" data-screen="cabinet">
+        <span class="nav-icon">👥</span>
+        <span class="nav-label">मंत्रिमंडल</span>
+      </button>
+      <button class="nav-item" data-screen="quiz">
+        <span class="nav-icon">❓</span>
+        <span class="nav-label">क्विज</span>
+      </button>
+      <button class="nav-item" data-screen="profile">
+        <span class="nav-icon">👤</span>
+        <span class="nav-label">प्रोफ़ाइल</span>
+      </button>
+    </nav>
+
+    <!-- Sudden Crisis / Natural Disaster Modal -->
+    <div id="crisis-modal" class="modal-overlay hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="crisis-alert-icon">⚠️</span>
+          <h3 id="crisis-title">भीषण बाढ़ संकट: गंगा बेसिन</h3>
+        </div>
+        <div class="crisis-badge" id="crisis-region-tag">प्रभावित क्षेत्र: पूर्वी उत्तर प्रदेश व बिहार • उच्च गंभीरता</div>
+        <p class="crisis-desc" id="crisis-desc">
+          लगातार मूसलाधार बारिश से 4 जिलों में 500 से अधिक गांव जलमग्न हो गए हैं। लगभग 3 लाख नागरिक प्रभावित हैं।
+        </p>
+        <div class="crisis-choices-list" id="crisis-choices-container">
+          <!-- Choice cards -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Crisis Outcome Modal -->
+    <div id="outcome-modal" class="modal-overlay hidden">
+      <div class="modal-content outcome-box">
+        <h3>कार्यवाही का परिणाम</h3>
+        <p id="outcome-text" class="mt-12"></p>
+        <button id="btn-close-outcome" class="btn-primary mt-16">स्वीकार करें</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
