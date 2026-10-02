@@ -7,6 +7,9 @@ on:
     branches: [ "main" ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     name: Generate APK in Cloud
@@ -15,6 +18,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -28,19 +33,24 @@ jobs:
 
       - name: Build Debug APK with Gradle
         run: |
-          ./gradlew assembleDebug --stacktrace --no-daemon 2>&1 | tee gradle_build.log || {
-            ERR_MSG=$(grep -i -E "(error:|what went wrong:|failure:)" -A 4 gradle_build.log | tr '\n' ' ' | head -c 250)
-            echo "::error title=Gradle Build Error::$ERR_MSG"
-            tail -n 60 gradle_build.log
-            exit 1
-          }
-
-      - name: List Generated APK Files
-        run: find . -name "*.apk" -ls
+          set -o pipefail
+          ./gradlew assembleDebug --stacktrace 2>&1 | tee gradle_build.log
 
       - name: Upload Generated APK
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: RashtraNiti-Android-App-APK
           path: "**/build/outputs/apk/**/*.apk"
           retention-days: 30
+
+      - name: Push Log to Branch on Failure
+        if: failure()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git branch -D build-logs || true
+          git checkout -b build-logs
+          git add gradle_build.log
+          git commit -m "Debug gradle build log"
+          git push -f origin build-logs
