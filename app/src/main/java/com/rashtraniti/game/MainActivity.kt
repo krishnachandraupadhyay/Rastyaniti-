@@ -19,6 +19,8 @@ import com.rashtraniti.game.ui.theme.DeepNavyBg
 import com.rashtraniti.game.ui.theme.RashtraNitiTheme
 import com.rashtraniti.game.viewmodel.GameViewModel
 import com.rashtraniti.game.viewmodel.Screen
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 class MainActivity : ComponentActivity() {
 
