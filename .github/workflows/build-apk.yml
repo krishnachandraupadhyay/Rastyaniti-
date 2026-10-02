@@ -27,7 +27,13 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build Debug APK with Gradle
-        run: ./gradlew assembleDebug --stacktrace --no-daemon
+        run: |
+          ./gradlew assembleDebug --stacktrace --no-daemon 2>&1 | tee gradle_build.log || {
+            ERR_MSG=$(grep -i -E "(error:|what went wrong:|failure:)" -A 4 gradle_build.log | tr '\n' ' ' | head -c 250)
+            echo "::error title=Gradle Build Error::$ERR_MSG"
+            tail -n 60 gradle_build.log
+            exit 1
+          }
 
       - name: List Generated APK Files
         run: find . -name "*.apk" -ls
@@ -37,5 +43,4 @@ jobs:
         with:
           name: RashtraNiti-Android-App-APK
           path: "**/build/outputs/apk/**/*.apk"
-          if-no-files-found: error
           retention-days: 30
