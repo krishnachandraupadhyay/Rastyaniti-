@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace = "com.rashtraniti.game"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.rashtraniti.game"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0.0"
 
