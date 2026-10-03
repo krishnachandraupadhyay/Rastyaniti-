@@ -89,10 +89,25 @@ const INITIAL_BUDGET: BudgetAllocation = {
 };
 
 export const AppContent: React.FC = () => {
-  // Game Stage Router
+  // Game Stage Router: If player & party already exist, never ask basic details again!
   const [stage, setStage] = useState<GameStage>(() => {
-    const saved = localStorage.getItem('rn_stage');
-    return (saved as GameStage) || 'CINEMATIC';
+    try {
+      const savedStage = localStorage.getItem('rn_stage');
+      const savedParty = localStorage.getItem('rn_party');
+      const savedPlayer = localStorage.getItem('rn_player');
+      const detailsCompleted = localStorage.getItem('rn_details_completed');
+
+      // If user has already filled basic details, jump straight to MAIN_GAME or ELECTION_DAY
+      if (detailsCompleted === 'true' || savedStage === 'MAIN_GAME' || savedStage === 'ELECTION_DAY' || (savedParty && savedPlayer)) {
+        return savedStage === 'ELECTION_DAY' ? 'ELECTION_DAY' : 'MAIN_GAME';
+      }
+      if (savedPlayer && !savedParty) {
+        return 'PARTY_CREATION';
+      }
+      return (savedStage as GameStage) || 'CINEMATIC';
+    } catch {
+      return 'CINEMATIC';
+    }
   });
 
   const [currentTab, setCurrentTab] = useState<NavTab>('HOME');
@@ -227,12 +242,19 @@ export const AppContent: React.FC = () => {
 
   // Persist State
   const saveGameState = () => {
-    localStorage.setItem('rn_stage', stage);
-    localStorage.setItem('rn_player', JSON.stringify(player));
-    if (party) localStorage.setItem('rn_party', JSON.stringify(party));
-    localStorage.setItem('rn_support', JSON.stringify(support));
-    localStorage.setItem('rn_constituencies', JSON.stringify(constituencies));
-    localStorage.setItem('rn_election_days', daysToElection.toString());
+    try {
+      localStorage.setItem('rn_stage', stage);
+      localStorage.setItem('rn_player', JSON.stringify(player));
+      if (party) {
+        localStorage.setItem('rn_party', JSON.stringify(party));
+        localStorage.setItem('rn_details_completed', 'true');
+      }
+      localStorage.setItem('rn_support', JSON.stringify(support));
+      localStorage.setItem('rn_constituencies', JSON.stringify(constituencies));
+      localStorage.setItem('rn_election_days', daysToElection.toString());
+    } catch (e) {
+      console.warn('Storage save failed', e);
+    }
   };
 
   useEffect(() => {
@@ -440,6 +462,10 @@ export const AppContent: React.FC = () => {
         <CharacterCreation
           onComplete={(profile) => {
             setPlayer(profile);
+            try {
+              localStorage.setItem('rn_player', JSON.stringify(profile));
+              localStorage.setItem('rn_stage', 'PARTY_CREATION');
+            } catch {}
             setStage('PARTY_CREATION');
           }}
         />
@@ -450,6 +476,11 @@ export const AppContent: React.FC = () => {
         <PartyCreation
           onComplete={(newParty) => {
             setParty(newParty);
+            try {
+              localStorage.setItem('rn_party', JSON.stringify(newParty));
+              localStorage.setItem('rn_details_completed', 'true');
+              localStorage.setItem('rn_stage', 'MAIN_GAME');
+            } catch {}
             setStage('MAIN_GAME');
           }}
         />

@@ -67,7 +67,7 @@ export const MobileFrame: React.FC<MobileFrameProps> = ({ children }) => {
       <div
         className={`w-full transition-all duration-300 relative overflow-hidden flex flex-col ${
           isMobileView
-            ? 'max-w-[440px] h-[95vh] sm:h-[890px] rounded-none sm:rounded-[44px] border-0 sm:border-[8px] sm:border-slate-800/90 shadow-2xl bg-navy-950 ring-1 ring-white/10'
+            ? 'max-w-[460px] h-[96vh] sm:h-[910px] rounded-none sm:rounded-[44px] border-0 sm:border-[8px] sm:border-slate-800/90 shadow-2xl bg-navy-950 ring-1 ring-white/10'
             : 'max-w-4xl min-h-[92vh] rounded-2xl border border-slate-800 shadow-2xl bg-navy-950'
         }`}
       >
