@@ -1,32 +1,92 @@
-# React + TypeScript + Vite
+# राष्ट्रनीति (RashtraNiti)
+> **“एक आम आदमी से प्रधानमंत्री तक”**
+> 
+> *A Grand Political Strategy, Election Simulation & Governance Mobile Game set in India (भारत).*
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+---
 
-Currently, two official plugins are available:
+## 🏛️ परियोजना परिचय (Project Overview)
+**राष्ट्रनीति** एक काल्पनिक राजनीतिक रणनीति, चुनावी सिमुलेशन और शासन प्रबंधन मोबाइल गेम है। इसमें खिलाड़ी भारत के एक साधारण नागरिक से शुरुआत करके अपनी पार्टी की स्थापना करता है, जमीनी स्तर से चुनाव लड़ता है, संसद पहुंचता है, और अंततः भारत के प्रधानमंत्री पद तक पहुंचकर राष्ट्र का संचालन करता है।
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🚀 तकनीकी संरचना (Architecture & Platforms)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. **आधुनिक रिएक्ट + टाइपस्क्रिप्ट + कैपेसिटर ऐप (Vite + React 19 + TypeScript + Capacitor)**
+   - **भाषा व फ्रेमवर्क**: React 19, TypeScript, TailwindCSS 4, Vite
+   - **मोबाइल सपोर्ट**: Capacitor (Android native packaging ready)
+   - **स्थान**: `src/` (रिएक्ट कंपोनेंट्स, इंजन और स्टेट मैनेजमेंट)
+   - **लाइव सर्वर**: `http://localhost:5173` पर सक्रिय
 
-## Expanding the Oxlint configuration
+2. **मूल एंड्रॉइड स्टूडियो प्रोजेक्ट (Native Kotlin + Jetpack Compose)**
+   - **भाषा व फ्रेमवर्क**: Kotlin, Jetpack Compose (Material3)
+   - **आर्किटेक्चर**: MVVM, Clean Architecture, StateFlow, Coroutines
+   - **स्थान**: `app/` डायरेक्टरी
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+---
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+## 🌟 नवीनतम अद्यतन प्रणालियां (New Major Systems)
+
+### 1. डायनामिक बैकग्राउंड एनीमेशन सिस्टम (Dynamic Background Animation System)
+- **10 वायुमंडलीय मोड**:
+  - `HOME`: एनिमेटेड भारत मानचित्र, चमकती राज्य सीमाएं, घूमता अशोक चक्र, फ्लोटिंग पार्टिकल्स।
+  - `MAP`: इन्फ्लुएंस स्प्रेडिंग पल्स व रीजनल कनेक्टिविटी वेव्स।
+  - `ELECTION`: ईवीएम प्रतीक, लहराते झंडे व जनसमूह सिलुएट्स।
+  - `CAMPAIGN`: रैली में हाथ हिलाती भीड़, चलती प्रचार गाड़ी व डिजिटल स्पार्कल्स।
+  - `MEDIA`: लाइव न्यूज़ टिकर बार, ब्रॉडकास्ट स्कैनलाइन्स व कैमरा फ्लैश प्रभाव।
+  - `CRISIS`: 5 विशिष्ट वायुमंडलीय रूप (बाढ़, सूखा, चक्रवात, आर्थिक संकट, राजनीतिक संकट)।
+  - `GOVERNMENT`: संसद भवन (संसद) सिलुएट, जीडीपी ग्रोथ वेव।
+  - `SUCCESS`: ऊपर उठते ग्रोथ बार व उत्सव स्पार्कल्स।
+  - `DISASTER_RESPONSE`: पल्सिंग रडार बीकन व राहत संसाधन प्रवाह।
+- **कम गति मोड (Reduced Motion)** व स्वचालित गेम मोड ट्रैकिंग।
+- **पूर्वावलोकन टूल**: `🎨 एनीमेशन` बटन द्वारा सभी मोड तुरंत टेस्ट किए जा सकते हैं।
+
+### 2. 7-दिवसीय चुनाव अभियान व चुनावी जोखिम प्रणाली (7-Day Election Campaign & Risk System)
+- **Day 1**: घोषणापत्र विजन व रणनीति चयन (युवा, किसान, रोजगार, बुनियादी ढांचा)।
+- **Day 2**: सघन जमीनी जनसंपर्क (Door-to-door, चौपाल, महा-रैली, बूथ प्रबंधन)।
+- **Day 3**: मीडिया दिवस (टीवी डिबेट, प्रेस कॉन्फ्रेंस, सोशल मीडिया, विवाद समाधान)।
+- **Day 4**: विपक्षी दल का पलटवार व जवाबी रणनीति।
+- **Day 5**: आकस्मिक स्थानीय संकट (बाढ़, जर्जर पुलिया, भ्रामक क्लिप) व सीमित संसाधन आवंटन।
+- **Day 6**: लाइव टीवी महा-डिबेट (नीतिगत सवालों के तार्किक उत्तर)।
+- **Day 7**: मतदान दिवस व 5-राउंड लाइव ईवीएम मतगणना।
+- **विस्तृत विश्लेषण (Post-Election Scorecard)** व विपक्ष के नेता के रूप में संगठन पुनर्निर्माण।
+
+### 3. फ्रेंड्स एवं मल्टीप्लेयर पार्टी सदस्य प्रणाली (Friends & Multiplayer Party Members System)
+- **पार्टी लीडर व संगठनात्मक पदानुक्रम**: राष्ट्रीय अध्यक्ष, वरिष्ठ नेता, प्रदेश अध्यक्ष, जिला अध्यक्ष, अभियान प्रबंधक, मीडिया प्रभारी, मोर्चा प्रमुख, सक्रिय सदस्य।
+- **मित्र आमंत्रण**: Player ID, यूजरनेम, यूनिक इनवाइट कोड।
+- **सक्रिय खाता स्विचर**: किसी भी साथी (अमित कुमार, प्रिया शर्मा, राजेश पटेल, विक्रम सिंह) के खाते में स्विच करके कार्यभार प्रबंधन।
+- **क्षेत्रीय चुनावी कार्यभार (Multiplayer Assignments)**: राज्यों का आवंटन व कार्यों से पार्टी फंड/लोकप्रियता वृद्धि।
+- **पार्टी वॉर रूम चैट**: लाइव मैसेजिंग व राष्ट्रीय अध्यक्ष की विशेष घोषणाएं।
+- **योगदान लीडरबोर्ड**: सदस्यों की रैंकिंग व पार्टी लेवल (1-10)।
+
+---
+
+## 🛠️ प्रोजेक्ट कैसे चलाएं? (How to Run)
+
+### वेब / कैपेसिटर ऐप (Recommended):
+```bash
+npm install
+npm run dev
+```
+ब्राउज़र में खोलें: `http://localhost:5173`
+
+उत्पादन बिल्ड (Production Build):
+```bash
+npm run build
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+---
+
+## 📱 12 स्तरीय राजनीतिक यात्रा (12 Levels of Progression)
+1. आम नागरिक (Common Citizen)
+2. दल संस्थापक (Party Founder)
+3. स्थानीय प्रत्याशी (Local Candidate)
+4. जनप्रतिनिधि (Elected Representative)
+5. राज्यस्तरीय नेता (State Politician)
+6. विधानसभा चुनाव (State Election)
+7. राष्ट्रीय नेता (National Politician)
+8. सांसद (Member of Parliament)
+9. सरकार गठन (Government Formation)
+10. प्रधानमंत्री (Prime Minister of Bharat)
+11. राष्ट्र संचालन (National Governance)
+12. अगला आम चुनाव (Next General Election)
