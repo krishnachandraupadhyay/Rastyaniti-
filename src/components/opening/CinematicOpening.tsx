@@ -109,12 +109,22 @@ export const CinematicOpening: React.FC<CinematicOpeningProps> = ({ onStartGame 
         </div>
       </div>
 
-      {/* Center Cinematic Monologue */}
+      {/* Center Cinematic Monologue & Logo */}
       <div className="z-10 max-w-sm my-auto">
-        <h1 className="text-4xl sm:text-5xl font-black font-display text-transparent bg-clip-text bg-gradient-to-r from-saffron via-white to-tiranga-green drop-shadow-md tracking-wider mb-2">
-          {t.cinematic.title}
+        {/* App Icon Logo */}
+        <div className="flex justify-center mb-3">
+          <img 
+            src="/rajniti-logo.png" 
+            alt="Rाजनीति Logo" 
+            className="w-24 h-24 rounded-3xl shadow-[0_0_25px_rgba(245,158,11,0.35)] border border-amber-400/60 object-cover" 
+          />
+        </div>
+
+        <h1 className="text-4xl sm:text-5xl font-black font-display tracking-wider mb-2 flex items-center justify-center">
+          <span className="text-amber-300 font-serif text-5xl sm:text-6xl font-black drop-shadow-[0_0_15px_rgba(245,158,11,0.6)]">R</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-white to-emerald-400 drop-shadow-md">ाजनीति</span>
         </h1>
-        <p className="text-sm font-semibold text-amber-300/90 mb-6 tracking-wide">
+        <p className="text-xs font-semibold text-amber-300/90 mb-6 tracking-wide">
           {t.cinematic.subtitle}
         </p>
 

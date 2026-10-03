@@ -28,6 +28,11 @@ export const HeaderBar: React.FC<HeaderBarProps> = ({
       {/* Top Row: Level Title, Days to Election, Language & Sound */}
       <div className="flex items-center justify-between gap-2 mb-1.5">
         <div className="flex items-center gap-1.5 min-w-0">
+          <img 
+            src="/rajniti-logo.png" 
+            alt="Rाजनीति" 
+            className="w-5 h-5 rounded-md border border-amber-400/60 object-cover flex-shrink-0"
+          />
           <span className="flex-shrink-0 px-2 py-0.5 rounded-full bg-gradient-to-r from-saffron to-amber-500 text-[10px] font-black tracking-wider text-navy-950 uppercase shadow-sm">
             L{player.level}
           </span>
