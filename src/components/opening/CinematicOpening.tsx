@@ -112,11 +112,11 @@ export const CinematicOpening: React.FC<CinematicOpeningProps> = ({ onStartGame 
       {/* Center Cinematic Monologue & Logo */}
       <div className="z-10 max-w-sm my-auto">
         {/* App Icon Logo */}
-        <div className="flex justify-center mb-3">
+        <div className="flex justify-center mb-4">
           <img 
             src="/rajniti-logo.png" 
-            alt="Rाजनीति Logo" 
-            className="w-24 h-24 rounded-3xl shadow-[0_0_25px_rgba(245,158,11,0.35)] border border-amber-400/60 object-cover" 
+            alt="RASHTRA तंत्र Logo" 
+            className="w-28 h-28 rounded-3xl bg-white p-2 shadow-[0_0_30px_rgba(245,158,11,0.45)] border-2 border-amber-400 object-contain" 
           />
         </div>
 

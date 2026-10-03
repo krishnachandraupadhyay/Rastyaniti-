@@ -30,8 +30,8 @@ export const HeaderBar: React.FC<HeaderBarProps> = ({
         <div className="flex items-center gap-2 min-w-0">
           <img 
             src="/rajniti-logo.png" 
-            alt="Rाजनीति" 
-            className="w-7 h-7 rounded-lg border border-amber-400/60 object-cover flex-shrink-0 shadow"
+            alt="RASHTRA तंत्र" 
+            className="w-8 h-8 rounded-lg bg-white p-0.5 border border-amber-400/80 object-contain flex-shrink-0 shadow"
           />
           <span className="flex-shrink-0 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-saffron to-amber-500 text-xs font-black tracking-wider text-navy-950 uppercase shadow-sm">
             L{player.level}
